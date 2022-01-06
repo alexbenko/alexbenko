@@ -1,3 +1,6 @@
+![age](https://img.shields.io/badge/age-23-blue)
+![focus](https://img.shields.io/badge/focus-FullStack-brightgreen)
+![visitors](https://visitor-badge.glitch.me/badge?page_id=alexbenko)
 ### Hi there 👋
 
 <!--
