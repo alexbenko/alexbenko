@@ -1,5 +1,6 @@
 ![focus](https://img.shields.io/badge/focus-FullStack-red)
 ![living](https://img.shields.io/badge/living-Colorado-brightgreen)
+![status](https://img.shields.io/badge/employment_status-Employed-blueviolet)
 ![visitors](https://visitor-badge.glitch.me/badge?page_id=alexbenko)
 ### Hi there 👋
 
