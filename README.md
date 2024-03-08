@@ -1,5 +1,5 @@
 ![focus](https://img.shields.io/badge/focus-Full_Stack-red)
-![living](https://img.shields.io/badge/living-Oregon-brightgreen)
+![living](https://img.shields.io/badge/living-California-brightgreen)
 ![status](https://img.shields.io/badge/employment_status-Employed-blueviolet)
 
 ### Hi there 👋
