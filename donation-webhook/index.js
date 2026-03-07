@@ -2,6 +2,10 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+const ORG_NAME = 'Neighborhood Harvest';
+const ORG_ADDRESS = 'PO BOX 631, Willow Creek, CA 95573';
+const ORG_WEBSITE = 'http://neighborhood-harvest.org';
+
 const app = express();
 
 // Use raw body for Stripe signature verification
@@ -86,6 +90,11 @@ async function sendDonationEmail(session) {
       ``,
       `Payment ID: ${session.payment_intent}`,
       `Session ID: ${session.id}`,
+      ``,
+      `--`,
+      `${ORG_NAME}`,
+      `${ORG_ADDRESS}`,
+      `${ORG_WEBSITE}`,
     ].join('\n'),
     html: `
       <h2>New Donation Received!</h2>
@@ -100,6 +109,12 @@ async function sendDonationEmail(session) {
       <p style="color: #888; font-size: 12px;">
         Payment ID: ${session.payment_intent}<br>
         Session ID: ${session.id}
+      </p>
+      <hr style="border: none; border-top: 1px solid #eee; margin: 24px 0;"/>
+      <p style="color: #888; font-size: 12px; text-align: center;">
+        ${escapeHtml(ORG_NAME)}<br>
+        ${escapeHtml(ORG_ADDRESS)}<br>
+        <a href="${ORG_WEBSITE}" style="color: #888;">${ORG_WEBSITE}</a>
       </p>
     `,
   };
