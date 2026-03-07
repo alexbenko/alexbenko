@@ -20,27 +20,6 @@
 
 <br clear="right"/>
 
----
-
-## Featured Project — HarvestHub 🌿
-
-<div align="center">
-
-[![HarvestHub](https://github-readme-stats.vercel.app/api/pin/?username=Neighborhood-Harvest&repo=harvest_hub&theme=tokyonight&hide_border=true&bg_color=0d1117)](https://github.com/Neighborhood-Harvest/harvest_hub)
-
-</div>
-
-> A neighborhood-scale food sharing platform connecting local growers, harvesters, and community members. Built with a production-grade microservices-inspired architecture.
-
-**Key Features:**
-- 🗺️ Interactive map with geolocated listings (Leaflet + OpenStreetMap)
-- 🔐 JWT-based authentication with Cloudflare Turnstile bot protection
-- ⚡ Async task processing (Celery + Redis) for notifications and scheduling
-- 📦 Media storage on Cloudflare R2 with automatic image optimization
-- 📡 Real-time updates via Django Channels (WebSockets)
-- 📬 Transactional email via Mailjet
-- 🧪 Full test coverage — pytest (backend) + Vitest (frontend)
-- 🚀 CI/CD via GitHub Actions → GHCR → Docker Compose
 
 ---
 
