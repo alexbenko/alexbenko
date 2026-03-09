@@ -1,0 +1,118 @@
+<section class="cash-donations-page">
+  <div class="page-header">
+    <h1>Record Cash Donation</h1>
+    <p class="page-subtitle">Log an in-person or mailed cash/check donation received by staff.</p>
+  </div>
+
+  <mat-card class="donation-form-card">
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" class="donation-form">
+
+        <!-- Donor Name -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Donor Name</mat-label>
+          <input matInput [formControl]="donorNameCtrl" placeholder="Full name or organization">
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+
+        <!-- Donation Type — autocomplete, full list shown on focus -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Donation Type</mat-label>
+          <input
+            matInput
+            [formControl]="donationTypeCtrl"
+            [matAutocomplete]="typeAuto"
+            placeholder="Select or type to search…"
+          >
+          <mat-icon matSuffix>category</mat-icon>
+          <mat-autocomplete #typeAuto="matAutocomplete" autoActiveFirstOption>
+            <mat-option
+              *ngFor="let type of filteredTypes$ | async"
+              [value]="type"
+            >
+              {{ type }}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-hint>Click to see all types or start typing to filter</mat-hint>
+        </mat-form-field>
+
+        <!-- Payment Method — autocomplete, full list shown on focus -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Payment Method</mat-label>
+          <input
+            matInput
+            [formControl]="paymentMethodCtrl"
+            [matAutocomplete]="paymentAuto"
+            placeholder="Select or type to search…"
+          >
+          <mat-icon matSuffix>payment</mat-icon>
+          <mat-autocomplete #paymentAuto="matAutocomplete" autoActiveFirstOption>
+            <mat-option
+              *ngFor="let method of filteredPaymentMethods$ | async"
+              [value]="method"
+            >
+              {{ method }}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-hint>Click to see all methods or start typing to filter</mat-hint>
+        </mat-form-field>
+
+        <!-- Donation Fund — autocomplete, full list shown on focus -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Designate to Fund</mat-label>
+          <input
+            matInput
+            [formControl]="donationFundCtrl"
+            [matAutocomplete]="fundAuto"
+            placeholder="Select or type to search…"
+          >
+          <mat-icon matSuffix>account_balance</mat-icon>
+          <mat-autocomplete #fundAuto="matAutocomplete" autoActiveFirstOption>
+            <mat-option
+              *ngFor="let fund of filteredFunds$ | async"
+              [value]="fund"
+            >
+              {{ fund }}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-hint>Click to see all funds or start typing to filter</mat-hint>
+        </mat-form-field>
+
+        <!-- Amount -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Amount ($)</mat-label>
+          <input matInput type="number" min="0" step="0.01" [formControl]="amountCtrl" placeholder="0.00">
+          <span matTextPrefix>$&nbsp;</span>
+          <mat-icon matSuffix>attach_money</mat-icon>
+        </mat-form-field>
+
+        <!-- Date Received -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Date Received</mat-label>
+          <input matInput [matDatepicker]="picker" [formControl]="dateCtrl">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <!-- Notes -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Notes</mat-label>
+          <textarea matInput [formControl]="notesCtrl" rows="3" placeholder="Optional notes or check number"></textarea>
+          <mat-icon matSuffix>notes</mat-icon>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit">
+            <mat-icon>save</mat-icon>
+            Record Donation
+          </button>
+          <button mat-stroked-button type="button" (click)="resetForm()">
+            Clear
+          </button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</section>
