@@ -1,0 +1,234 @@
+.album-config-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 80px;
+}
+
+/* ── Loading ── */
+.loading-state {
+  display: flex;
+  justify-content: center;
+  padding: 80px 0;
+}
+
+/* ── Page header ── */
+.page-header {
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0 0 4px;
+    font-size: 1.75rem;
+    font-weight: 500;
+  }
+
+  .subtitle {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 0.95rem;
+  }
+}
+
+/* ── Current-preview banner ── */
+.preview-banner {
+  margin-bottom: 32px;
+  border-left: 4px solid #1976d2;
+
+  .preview-banner-inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .preview-thumb {
+    width: 96px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .preview-banner-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .preview-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    font-size: 0.95rem;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: #1976d2;
+    }
+  }
+
+  .preview-hint {
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.54);
+  }
+}
+
+/* ── Section title ── */
+.section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 16px;
+
+  h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  .photo-count {
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.54);
+  }
+}
+
+/* ── Empty state ── */
+.empty-state {
+  text-align: center;
+  padding: 48px 0;
+  color: rgba(0, 0, 0, 0.38);
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 12px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1rem;
+  }
+}
+
+/* ── Photo grid ── */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.photo-card {
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  background: #f5f5f5;
+  outline: none;
+
+  &:hover,
+  &:focus-visible {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  &.selected {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.25);
+
+    .selection-overlay {
+      opacity: 1;
+    }
+  }
+
+  .photo-wrapper {
+    position: relative;
+
+    img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+  }
+}
+
+/* ── Selection overlay (checkmark) ── */
+.selection-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(25, 118, 210, 0.35);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+
+  .check-icon {
+    color: #fff;
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+  }
+}
+
+/* ── Chips ── */
+.photo-chips {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  display: flex;
+  gap: 4px;
+}
+
+.chip-selected {
+  --mdc-chip-label-text-color: #fff;
+  background-color: #1976d2 !important;
+  font-size: 0.75rem;
+  height: 22px !important;
+}
+
+.chip-default {
+  --mdc-chip-label-text-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 0.75rem;
+  height: 22px !important;
+}
+
+/* ── Photo caption ── */
+.photo-caption {
+  padding: 6px 8px;
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.7);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: #fff;
+}
+
+/* ── Save bar ── */
+.save-bar {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 12px 0;
+  background: linear-gradient(to top, #fff 80%, transparent);
+
+  .save-hint {
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.54);
+  }
+
+  .btn-spinner {
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+}

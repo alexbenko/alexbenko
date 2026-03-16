@@ -1,0 +1,53 @@
+.site-footer {
+  background-color: #2c5f2e;
+  color: #fff;
+  padding: 40px 24px 16px;
+  margin-top: auto;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: space-between;
+  max-width: 960px;
+  margin: 0 auto 24px;
+}
+
+.footer-org-name {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.footer-address {
+  font-style: normal;
+  line-height: 1.6;
+  opacity: 0.85;
+  font-size: 0.9rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    opacity: 0.85;
+    font-size: 0.9rem;
+
+    &:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+  }
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 16px;
+  opacity: 0.7;
+  font-size: 0.8rem;
+}
