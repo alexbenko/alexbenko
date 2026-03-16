@@ -73,3 +73,40 @@ private _filter(value: string, options: string[]): string[] {
 ### Admin Components Using This Pattern
 
 - `pages/cash-donations` — records in-person cash/check donations received by staff
+
+## Photo Album Social Media Preview
+
+Each album has an optional `social_preview_photo` that is used as the `og:image`
+when the album link is shared on social media.
+
+### Behaviour
+
+- **Default**: if `social_preview_photo` is `null` the backend (and the Angular
+  component) automatically fall back to the **first photo** in the album
+  (ordered by `position` then `id`).
+- **Explicit**: admins can pick any photo in the album via the config page.
+  The selection is saved as `social_preview_photo_id` on the `Album` model.
+
+### API
+
+| Method | Endpoint | Body | Description |
+|--------|----------|------|-------------|
+| `GET`  | `/api/albums/{id}/` | — | Returns album + all photos + `social_preview_url` |
+| `PATCH`| `/api/albums/{id}/social-preview/` | `{ "social_preview_photo_id": <int\|null> }` | Updates the preview selection |
+
+Pass `null` to reset to the default (first photo).
+
+### Angular Component
+
+`pages/albums/album-config` — displays a responsive photo grid where each photo
+acts as a selectable card. Key points:
+
+- Clicking a photo stages it as the new preview (highlighted with a blue border
+  and a check-circle overlay).
+- The first photo shows a "Default" chip when nothing is explicitly saved.
+- The selected photo shows a "Preview" chip.
+- A sticky **Save preview selection** button only becomes active when the staged
+  selection differs from what is saved on the server (`isDirty` guard).
+- The component loads the album via `GET /api/albums/{id}/` and initialises the
+  selection from `social_preview_photo_id` (falling back to the first photo's id
+  so the UI always has a sensible default shown).

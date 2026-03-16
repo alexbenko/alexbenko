@@ -1,0 +1,96 @@
+<div class="album-config-container">
+
+  <!-- Loading spinner -->
+  <div *ngIf="loading" class="loading-state">
+    <mat-spinner diameter="48"></mat-spinner>
+  </div>
+
+  <ng-container *ngIf="!loading && album">
+
+    <!-- Page header -->
+    <div class="page-header">
+      <h1>{{ album.title }}</h1>
+      <p class="subtitle">Choose which photo appears when this album is shared on social media.</p>
+    </div>
+
+    <!-- Current preview banner -->
+    <mat-card class="preview-banner" *ngIf="album.social_preview_url">
+      <mat-card-content>
+        <div class="preview-banner-inner">
+          <img [src]="album.social_preview_url" alt="Current social media preview" class="preview-thumb" />
+          <div class="preview-banner-text">
+            <span class="preview-label">
+              <mat-icon>share</mat-icon>
+              Current social media preview
+            </span>
+            <span class="preview-hint">This photo is used as the og:image when the album link is shared.</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Photo grid -->
+    <div class="section-title">
+      <h2>Album photos</h2>
+      <span class="photo-count">{{ album.photos.length }} photo{{ album.photos.length !== 1 ? 's' : '' }}</span>
+    </div>
+
+    <div *ngIf="album.photos.length === 0" class="empty-state">
+      <mat-icon>photo_library</mat-icon>
+      <p>No photos in this album yet.</p>
+    </div>
+
+    <div class="photo-grid" *ngIf="album.photos.length > 0">
+      <div
+        *ngFor="let photo of album.photos"
+        class="photo-card"
+        [class.selected]="isSelected(photo)"
+        (click)="selectPhoto(photo)"
+        [attr.aria-label]="'Select ' + (photo.caption || 'photo ' + photo.id) + ' as social preview'"
+        role="radio"
+        [attr.aria-checked]="isSelected(photo)"
+        tabindex="0"
+        (keydown.enter)="selectPhoto(photo)"
+        (keydown.space)="selectPhoto(photo)"
+      >
+        <div class="photo-wrapper">
+          <img [src]="photo.image_url" [alt]="photo.caption || 'Album photo'" loading="lazy" />
+
+          <!-- Selection overlay -->
+          <div class="selection-overlay">
+            <mat-icon class="check-icon">check_circle</mat-icon>
+          </div>
+
+          <!-- Chips -->
+          <div class="photo-chips">
+            <mat-chip *ngIf="isSelected(photo)" class="chip-selected">
+              <mat-icon matChipLeadingIcon>check</mat-icon>
+              Preview
+            </mat-chip>
+            <mat-chip *ngIf="isDefault(photo) && !isSelected(photo)" class="chip-default">
+              Default
+            </mat-chip>
+          </div>
+        </div>
+
+        <div class="photo-caption" *ngIf="photo.caption">{{ photo.caption }}</div>
+      </div>
+    </div>
+
+    <!-- Save bar -->
+    <div class="save-bar" *ngIf="album.photos.length > 0">
+      <span class="save-hint" *ngIf="isDirty">Unsaved changes</span>
+      <button
+        mat-flat-button
+        color="primary"
+        [disabled]="!isDirty || saving"
+        (click)="savePreview()"
+      >
+        <mat-icon *ngIf="!saving">save</mat-icon>
+        <mat-spinner *ngIf="saving" diameter="20" class="btn-spinner"></mat-spinner>
+        {{ saving ? 'Saving…' : 'Save preview selection' }}
+      </button>
+    </div>
+
+  </ng-container>
+</div>
